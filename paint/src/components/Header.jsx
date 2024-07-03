@@ -3,10 +3,9 @@
 export default function Header(){
     return(
         <nav>
-            <ul>
-                <li></li>
-                <li></li>
-            </ul>
+            <div>
+                <h1 className="text-red-500">asd</h1>
+            </div>
         </nav>
     )
 }
