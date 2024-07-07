@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Card({ src, alt, label }) {
   return (
     <div className="flex flex-col">
-      <div className=" p-4 rounded bg-[#ffffff]">
+      <div className=" p-4 rounded bg-[#ffffff] shadow-sm shadow-[#c1c1c1]">
         <img
           className="rounded box-border w-[300px] h-[200px] hover:scale-100 ease-in-out mb-4"
           src={src}
