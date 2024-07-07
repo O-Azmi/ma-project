@@ -1,11 +1,11 @@
 import React from "react";
-import backgroundImage from "../../Images/Background-home.jpg";
+import backgroundImage from "../../Images/home.svg";
 export default function HeroImage() {
   return (
     <div
-      className=" flex items-center h-[93.5%] justify-center bg-cover bg-center"
+      className=" flex items-center h-[93.5%] justify-center"
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`,
+        backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
