@@ -3,7 +3,7 @@ import backgroundImage from "../../Images/Background-home.jpg";
 export default function HeroImage() {
   return (
     <div
-      className=" flex items-center h-[92%] justify-center bg-cover bg-center"
+      className=" flex items-center h-[93.5%] justify-center bg-cover bg-center"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${backgroundImage})`,
         backgroundSize: "cover",
