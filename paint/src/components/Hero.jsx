@@ -3,7 +3,7 @@ import backgroundImage from "../../Images/home.svg";
 export default function HeroImage() {
   return (
     <div
-      className=" flex items-center h-[93.5%] justify-center"
+      className=" flex items-center h-screen justify-center"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",

@@ -5,14 +5,11 @@ import SVG from "../../Images/wave-haikei.svg";
 export default function Section() {
   return (
     <section
-      className="flex flex-col h-screen"
-      style={{
-        backgroundImage: ` url(${SVG})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "105vh",
-      }}
-    >
+    className="flex flex-col h-screen bg-cover bg-no-repeat "
+    style={{
+      backgroundImage: `url(${SVG})`,
+    }}
+  >
       <>
         <div className="flex flex-col">
           <div>
