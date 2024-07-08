@@ -42,7 +42,7 @@ export default function Header() {
 
       <div
         className={`absolute top-[3em] right-0 mt-2 w-[8em] text-center bg-[#f1f0ee] rounded-lg text-white transition-all duration-500 ease-out overflow-hidden ${
-          toggle ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+          toggle ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <ul className="w-full">
@@ -53,7 +53,12 @@ export default function Header() {
           </li>
           <li className="py-4 px-4 border-b border-gray-300 hover:bg-gray-400">
             <a href="#" className="text-black hover:underline">
-              Contact
+              Catalogue
+            </a>
+          </li>
+          <li className="py-4 px-4 border-b border-gray-300 hover:bg-gray-400">
+            <a href="#" className="text-black hover:underline">
+             Contact
             </a>
           </li>
           <li className="py-4 px-4 border-b border-gray-300 hover:bg-gray-400">
