@@ -26,7 +26,7 @@ export default function Header() {
 
   return (
     <nav className="flex relative h-[3.5em] justify-between items-center text-black text-[1.1em] px-4">
-      <img className="h-14 w-[10em]" src={Logo} alt="Brand Logo" />
+      <img className="h-[3.3em] w-[8em]"  src={Logo} alt="Brand Logo" />
       <div className="flex items-center">
         <div>
           <button
