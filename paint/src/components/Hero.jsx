@@ -1,5 +1,8 @@
 import React from "react";
 import backgroundImage from "../../Images/home.svg";
+
+
+// This page is the first page users will see.
 export default function HeroImage() {
   return (
     <div

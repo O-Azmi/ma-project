@@ -5,7 +5,7 @@ import Artist1 from '../../Images/artist1.jpg'
 export default function Learn() {
   return (
     <section
-      className="flex flex-col h-screen bg-cover bg-no-repeat "
+      className="flex flex-col short:h-[110vh] vshort:h-[120vh] h-screen bg-cover bg-no-repeat "
       style={{
         backgroundImage: `url(${BackSvg})`,
       }}

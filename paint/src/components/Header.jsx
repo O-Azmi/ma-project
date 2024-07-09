@@ -6,9 +6,11 @@ import { IoClose } from "react-icons/io5";
 import {Link} from "react-router-dom";
 import Cart from './Cart'
 
+// This page is the navigation bar used throughout the website
 export default function Header() {
   const [toggle, setToggle] = useState(false);
 
+  // This function toggles the dropdown menu on the navigation.
   const toggleMenu = () => {
     setToggle(!toggle);
   };

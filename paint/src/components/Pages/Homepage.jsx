@@ -3,6 +3,7 @@ import Hero from '../Hero'
 import Section from '../Section'
 import React from 'react';
 import LearnMore from '../LearnMore'
+import Footer from '../Footer'
 
 export default function Homepage(){
     return(
@@ -11,6 +12,7 @@ export default function Homepage(){
         <Hero/>
         <Section/>
         <LearnMore/>
+        <Footer/>
         </>
     )
 }

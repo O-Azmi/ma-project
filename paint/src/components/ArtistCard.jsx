@@ -1,4 +1,6 @@
 
+//This component is a card componentfor artists that join the team.
+
 export default function Card({ src, alt, name, job, description }) {
   return (
     <div className="flex flex-col  text-black">

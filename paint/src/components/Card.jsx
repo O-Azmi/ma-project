@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+// This is a card component for paintings.
 export default function Card({ src, alt, label }) {
   return (
     <div className="flex flex-col">
