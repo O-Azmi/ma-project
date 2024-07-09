@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       screens: {
-        'short': { 'raw': '(max-height: 844px)' },
+        'short': { 'raw': '(max-height: 897px)' },
+        'vshort': { 'raw': '(max-height: 668px)' },
       },
     },
   },

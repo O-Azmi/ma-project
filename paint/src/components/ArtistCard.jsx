@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 
 export default function Card({ src, alt, name, job, description }) {
   return (
-    <div className="flex flex-col text-white">
-      <div className=" flex flex-col items-center justify-center">
+    <div className="flex flex-col  text-black">
+      <div className=" flex flex-col items-center pt-[4em] justify-center">
         <img
-          className="rounded-[60%] box-border w-[300px] h-[300px] p-2 "
+          className="rounded-[50%] box-border w-[240px] mb-4 h-[240px] "
           src={src}
           alt={alt}
         />

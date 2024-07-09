@@ -1,12 +1,12 @@
 import Card from "./Card";
 import Abstract from "../../Images/Abstract.jpg";
 import Oil from "../../Images/Waves.jpg";
-import SVG from "../../Images/wave-haikei.svg";
+import SVG from "../../Images/2-Section.svg";
 
 export default function Section() {
   return (
     <section
-      className="flex flex-col short:h-[120vh] h-screen bg-cover bg-no-repeat"
+      className="flex flex-col short:h-[120vh] vshort:h-[140vh] h-screen bg-cover bg-no-repeat"
       style={{
         backgroundImage: `url(${SVG})`,
       }}
