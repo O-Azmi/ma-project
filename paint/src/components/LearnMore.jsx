@@ -11,7 +11,7 @@ export default function Learn() {
       }}
     >
          <>
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <div>
             <p className=" text-white text-center text-[2.8rem] font-semibold pb-4 pt-10">
               Meet Our Team
@@ -36,6 +36,7 @@ export default function Learn() {
             Apply Now
           </button>
         </div>
+        <span className="border-b border-solid border black mx-9 mt-4 mb-10"></span>
       </>
     </section>
   );

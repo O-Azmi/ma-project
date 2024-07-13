@@ -5,6 +5,9 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
 import {Link} from "react-router-dom";
 import Cart from './Cart'
+import SignIn from "./SignIn";
+import { CgProfile } from "react-icons/cg";
+
 
 // This page is the navigation bar used throughout the website
 export default function Header() {
@@ -31,10 +34,14 @@ export default function Header() {
         <div>
           <button
             onClick={toggleMenu}
-            className="px-3 py-2 rounded-md mr-4 "
+            className="px-3 py-2 rounded-md mr-1 "
           >
             <BurgerButton/>
           </button>
+        </div>
+        <div className="mr-3" >
+        <Link to="/SignIn" element={<SignIn/>}>
+        <CgProfile size={30} /></Link>
         </div>
         <div >
         <Link to="/cart" element={<Cart/>}>
