@@ -16,7 +16,7 @@ export default function SignIn() {
   return (
     <>
       <Header />
-      <section className="flex justify-center h-screen pb-20">
+      <section className="flex justify-center h-[20em] pb-20">
         <div className="flex flex-col border shadow-black px-4 py-6 mt-[6em] rounded w-full">
           <h1 className="font-semibold text-2xl text-center pb-6">
             Welcome to Mariz
