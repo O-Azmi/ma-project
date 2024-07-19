@@ -5,7 +5,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
 import {Link} from "react-router-dom";
 import Cart from './Cart'
-import Auth from "./Auth";
+import Authenticate from "./authenticate";
 import { CgProfile } from "react-icons/cg";
 
 
@@ -40,7 +40,7 @@ export default function Header() {
           </button>
         </div>
         <div className="mr-3" >
-        <Link to="/Auth" element={<Auth/>}>
+        <Link to="/Authenticate" element={<Authenticate/>}>
         <CgProfile size={30} /></Link>
         </div>
         <div >

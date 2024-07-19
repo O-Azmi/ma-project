@@ -5,14 +5,50 @@ export default function SignIn() {
   const [isCreateAccount, setIsCreateAccount] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
 
-  const togglePasswordVis = () =>{
-   setPasswordShown(passwordShown ? false : true);
-  }
+  const togglePasswordVis = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const handleRadioChange = (e) => {
     setIsCreateAccount(e.target.id === "create_account");
   };
 
+  const [formData, setFormData] = useState({
+    full_name: '',
+    email_address: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  console.log(formData)
+
+  const handleSubmit = async (e) => {
+
+    try {
+      const response = await fetch('http://localhost:3000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      console.log(response)
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('Signup successful:', data);
+
+      setFormData({ full_name: '', email_address: '', username: '', password: '' });
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+    }
+  };
   return (
     <>
       <Header />
@@ -34,15 +70,16 @@ export default function SignIn() {
             </label>
           </div>
           {isCreateAccount && (
-            <form className="flex flex-col mt-5 mb-2">
+            <form onSubmit={handleSubmit} className="flex flex-col mt-5 mb-2">
               <label htmlFor="fullname" className="pb-2 font-semibold">
                 First and last name
               </label>
               <input
                 className="rounded shadow mb-3 p-3"
                 type="text"
-                name="fullname"
+                name="full_name"
                 id="fullname"
+                onChange={handleChange}
               />
               <label htmlFor="email" className="pb-2 font-semibold">
                 Email
@@ -50,8 +87,9 @@ export default function SignIn() {
               <input
                 className="rounded shadow mb-3 p-3"
                 type="email"
-                name="email"
+                name="email_address"
                 id="email"
+                onChange={handleChange}
               />
               <label htmlFor="password" className="pb-2 font-semibold">
                 Create a password
@@ -61,6 +99,7 @@ export default function SignIn() {
                 type={passwordShown ? "text" : "password"}
                 name="password"
                 id="password"
+                onChange={handleChange}
               />
               <div className="flex gap-3">
                 <input
@@ -69,10 +108,12 @@ export default function SignIn() {
                   id="showpassword"
                   name="showpassword"
                   onClick={togglePasswordVis}
+                  onChange={handleChange}
+
                 />
                 <label htmlFor="showpassword">Show password</label>
               </div>
-              <button className="mt-4 p-4 rounded bg-[#2D2D2D] text-white hover:bg-gray-600 hover:text-black">
+              <button type="submit" className="mt-4 p-4 rounded bg-[#2D2D2D] text-white hover:bg-gray-600 hover:text-black">
                 Create account
               </button>
             </form>
