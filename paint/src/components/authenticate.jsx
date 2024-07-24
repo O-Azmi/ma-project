@@ -1,9 +1,19 @@
+import { useNavigate } from "react-router";
 import Header from "./Header";
 import { useState } from "react";
+import { TiWarning } from "react-icons/ti";
 
 export default function SignIn() {
   const [isCreateAccount, setIsCreateAccount] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+  const [handleError, setError] = useState("");
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    full_name: "",
+    email_address: "",
+    password: "",
+  });
 
   const togglePasswordVis = () => {
     setPasswordShown(!passwordShown);
@@ -13,42 +23,89 @@ export default function SignIn() {
     setIsCreateAccount(e.target.id === "create_account");
   };
 
-  const [formData, setFormData] = useState({
-    full_name: '',
-    email_address: '',
-    password: ''
-  });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  console.log(formData)
 
-  const handleSubmit = async (e) => {
+  const validation = (values) => {
+    const errors = {};
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!values.full_name && isCreateAccount)
+      errors.full_name = "Full name is required";
+    if (!values.email_address)
+      errors.email_address = "Email address is required";
+    if (values.email_address && !emailPattern.test(values.email_address))
+      errors.email_address = "Email address is invalid";
+    if (!values.password) errors.password = "Password is required";
+
+    return errors;
+  };
+
+  const handleSigninSubmit = async (e) => {
+    e.preventDefault();
+    const errors = validation(formData);
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
 
     try {
-      const response = await fetch('http://localhost:3000/signup', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/signin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
-      console.log(response)
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
 
-      const data = await response.json();
-      console.log('Signup successful:', data);
-
-      setFormData({ full_name: '', email_address: '', username: '', password: '' });
+      const responseText = await response.text();
+      console.log("Signin successful:", responseText);
+      navigate("/");
+      setFormData({ email_address: "", password: "" });
     } catch (error) {
-      console.error('Error signing up:', error.message);
+      if (error.message.length) {
+        setError("Email or Password is incorrect");
+      }
     }
   };
+
+  const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+    const errors = validation(formData);
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const responseText = await response.text();
+      console.log("Signup successful:", responseText);
+      navigate("/");
+
+      setFormData({ full_name: "", email_address: "", password: "" });
+    } catch (error) {
+      console.error("Error signing up:", error.message);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -70,7 +127,10 @@ export default function SignIn() {
             </label>
           </div>
           {isCreateAccount && (
-            <form onSubmit={handleSubmit} className="flex flex-col mt-5 mb-2">
+            <form
+              onSubmit={handleSignUpSubmit}
+              className="flex flex-col mt-5 mb-3"
+            >
               <label htmlFor="fullname" className="pb-2 font-semibold">
                 First and last name
               </label>
@@ -80,7 +140,16 @@ export default function SignIn() {
                 name="full_name"
                 id="fullname"
                 onChange={handleChange}
+                value={formData.full_name}
               />
+              {formErrors.full_name && (
+                <div className="flex items-center mb-3">
+                  <TiWarning className="text-red-500 mr-1" />
+                  <span className="font-semibold text-[.9em] text-red-500">
+                    {formErrors.full_name}
+                  </span>
+                </div>
+              )}
               <label htmlFor="email" className="pb-2 font-semibold">
                 Email
               </label>
@@ -90,7 +159,16 @@ export default function SignIn() {
                 name="email_address"
                 id="email"
                 onChange={handleChange}
+                value={formData.email_address}
               />
+              {formErrors.email_address && (
+                <div className="flex items-center mb-3">
+                  <TiWarning className="text-red-500 mr-1" />
+                  <span className="font-semibold text-[.9em] text-red-500">
+                    {formErrors.email_address}
+                  </span>
+                </div>
+              )}
               <label htmlFor="password" className="pb-2 font-semibold">
                 Create a password
               </label>
@@ -100,7 +178,16 @@ export default function SignIn() {
                 name="password"
                 id="password"
                 onChange={handleChange}
+                value={formData.password}
               />
+              {formErrors.password && (
+                <div className="flex items-center mb-3">
+                  <TiWarning className="text-red-500 mr-1" />
+                  <span className="font-semibold text-[.9em] text-red-500">
+                    {formErrors.password}
+                  </span>
+                </div>
+              )}
               <div className="flex gap-3">
                 <input
                   className="p-4 w-4"
@@ -109,11 +196,15 @@ export default function SignIn() {
                   name="showpassword"
                   onClick={togglePasswordVis}
                   onChange={handleChange}
-
                 />
-                <label htmlFor="showpassword">Show password</label>
+                <label className="" htmlFor="showpassword">
+                  Show password
+                </label>
               </div>
-              <button type="submit" className="mt-4 p-4 rounded bg-[#2D2D2D] text-white hover:bg-gray-600 hover:text-black">
+              <button
+                type="submit"
+                className="mt-4 p-4 rounded bg-[#2D2D2D] text-white hover:bg-gray-600 hover:text-black"
+              >
                 Create account
               </button>
             </form>
@@ -132,27 +223,60 @@ export default function SignIn() {
             </label>
           </div>
           {!isCreateAccount && (
-            <form className="flex flex-col py-4">
+            <form onSubmit={handleSigninSubmit} className="flex flex-col py-4">
               <p className="pb-2 font-semibold">Email</p>
               <input
                 className="rounded shadow mb-3 p-3"
                 type="email"
-                name="email"
+                name="email_address"
                 id="email"
                 placeholder="Enter your Email..."
+                onChange={handleChange}
+                value={formData.email_address}
               />
+              {formErrors.email_address && (
+                <div className="flex items-center mb-3">
+                  <TiWarning className="text-red-500 mr-1" />
+                  <span className="font-semibold text-[.9em] text-red-500">
+                    {formErrors.email_address}
+                  </span>
+                </div>
+              )}
               <input
-                className="rounded shadow p-3"
+                className="rounded shadow p-3 mb-3"
                 type="password"
                 name="password"
                 id="password"
                 placeholder="Enter your password..."
+                onChange={handleChange}
+                value={formData.password}
               />
-              <button className="mt-4 p-4 mb-4 rounded bg-[#2D2D2D] text-white hover:bg-gray-600 hover:text-black">
+              {formErrors.password && (
+                <div className="flex items-center">
+                  <TiWarning className="text-red-500 mr-1" />
+                  <span className="font-semibold text-[.9em] text-red-500">
+                    {formErrors.password}
+                  </span>
+                </div>
+              )}
+              {handleError && (
+                <div className="flex items-center">
+                  <TiWarning className="text-red-500 mr-1" />
+                  <span className="font-semibold text-[.9em] text-red-500 block">
+                    {handleError}
+                  </span>
+                </div>
+              )}
+              <button
+                type="submit"
+                className="mt-4 p-4 mb-4 rounded bg-[#2D2D2D] text-white hover:bg-gray-600 hover:text-black"
+              >
                 Sign In
               </button>
-              <div >
-                <a href="#" className="font-bold">Forgot password?</a>
+              <div>
+                <a href="#" className="font-bold">
+                  Forgot password?
+                </a>
               </div>
             </form>
           )}
