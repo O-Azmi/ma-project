@@ -1,33 +1,34 @@
 const express = require("express");
-const mysql = require("mysql2");
-const dbConfig = require("../../db");
+const mysql = require("mysql2/promise");
 const bcrypt = require('bcrypt');
+const { promisify } = require('util');
+const dbConfig = require("../../db");
 
 const app = express();
-
 app.use(express.json());
 
 const db = mysql.createPool(dbConfig);
 
-const signup = (req, res) => {
-  const {full_name, email_address, password} = req.body
+const genSalt = promisify(bcrypt.genSalt);
+const hash = promisify(bcrypt.hash);
 
-  const saltRounds = 10;
-  const password_salt = bcrypt.genSaltSync(saltRounds);
-  const password_hash= bcrypt.hashSync(password, password_salt);
+const signup = async (req, res) => {
+  try {
+    const { full_name, email_address, password } = req.body;
+    const saltRounds = 10;
 
+    const salt = await genSalt(saltRounds);
+    const password_hash = await hash(password, salt);
 
-  db.query('INSERT INTO customers (email_address, full_name, password_hash, password_salt) VALUES (?, ?, ?, ?)',
-    [email_address, full_name, password_hash, password_salt],
-    (err, results) =>{
-      if(err){
-        console.log(err)
-        return res.send("Error inserting data")
-      }
-      res.status(200)
-      res.send("Signup data inserted into database")
-    }
+    const query = 'INSERT INTO customers (email_address, full_name, password_hash, password_salt) VALUES (?, ?, ?, ?)';
+    const values = [email_address, full_name, password_hash, salt];
+    const [results] = await db.query(query, values);
 
-)};
+    res.status(200).send("Yes");
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 module.exports = signup;
