@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import Cart from './Cart'
 import Authenticate from "./authenticate";
 import { CgProfile } from "react-icons/cg";
+import Homepage from "./Pages/Homepage";
 
 
 // This page is the navigation bar used throughout the website
@@ -29,7 +30,7 @@ export default function Header() {
 
   return (
     <nav className="flex relative h-[3.5em] justify-between items-center text-black text-[1.1em] px-4">
-      <img className="h-[3.3em] w-[8em]"  src={Logo} alt="Brand Logo" />
+      <Link to="/" element={<Homepage/>}><img className="h-[3.3em] w-[8em]"  src={Logo} alt="Brand Logo" /></Link>
       <div className="flex items-center">
         <div>
           <button

@@ -6,7 +6,8 @@ import { TiWarning } from "react-icons/ti";
 export default function SignIn() {
   const [isCreateAccount, setIsCreateAccount] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
-  const [formErrors, setFormErrors] = useState({});
+  const [SignUpFormErrors, setSignUpFormErrors] = useState({});
+  const [SignInFormErrors, setSignInFormErrors] = useState({});
   const [handleError, setError] = useState("");
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -47,7 +48,8 @@ export default function SignIn() {
     e.preventDefault();
     const errors = validation(formData);
     if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
+      setSignInFormErrors(errors);
+      setError("");
       return;
     }
 
@@ -71,6 +73,7 @@ export default function SignIn() {
     } catch (error) {
       if (error.message.length) {
         setError("Email or Password is incorrect");
+        setSignInFormErrors("")
       }
     }
   };
@@ -79,7 +82,7 @@ export default function SignIn() {
     e.preventDefault();
     const errors = validation(formData);
     if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
+      setSignUpFormErrors(errors);
       return;
     }
 
@@ -142,11 +145,11 @@ export default function SignIn() {
                 onChange={handleChange}
                 value={formData.full_name}
               />
-              {formErrors.full_name && (
+              {SignUpFormErrors.full_name && (
                 <div className="flex items-center mb-3">
                   <TiWarning className="text-red-500 mr-1" />
                   <span className="font-semibold text-[.9em] text-red-500">
-                    {formErrors.full_name}
+                    {SignUpFormErrors.full_name}
                   </span>
                 </div>
               )}
@@ -161,11 +164,11 @@ export default function SignIn() {
                 onChange={handleChange}
                 value={formData.email_address}
               />
-              {formErrors.email_address && (
+              {SignUpFormErrors.email_address && (
                 <div className="flex items-center mb-3">
                   <TiWarning className="text-red-500 mr-1" />
                   <span className="font-semibold text-[.9em] text-red-500">
-                    {formErrors.email_address}
+                    {SignUpFormErrors.email_address}
                   </span>
                 </div>
               )}
@@ -180,11 +183,11 @@ export default function SignIn() {
                 onChange={handleChange}
                 value={formData.password}
               />
-              {formErrors.password && (
+              {SignUpFormErrors.password && (
                 <div className="flex items-center mb-3">
                   <TiWarning className="text-red-500 mr-1" />
                   <span className="font-semibold text-[.9em] text-red-500">
-                    {formErrors.password}
+                    {SignUpFormErrors.password}
                   </span>
                 </div>
               )}
@@ -234,11 +237,11 @@ export default function SignIn() {
                 onChange={handleChange}
                 value={formData.email_address}
               />
-              {formErrors.email_address && (
+              {SignInFormErrors.email_address && (
                 <div className="flex items-center mb-3">
                   <TiWarning className="text-red-500 mr-1" />
                   <span className="font-semibold text-[.9em] text-red-500">
-                    {formErrors.email_address}
+                    {SignInFormErrors.email_address}
                   </span>
                 </div>
               )}
@@ -251,11 +254,11 @@ export default function SignIn() {
                 onChange={handleChange}
                 value={formData.password}
               />
-              {formErrors.password && (
+              {SignInFormErrors.password && (
                 <div className="flex items-center">
                   <TiWarning className="text-red-500 mr-1" />
                   <span className="font-semibold text-[.9em] text-red-500">
-                    {formErrors.password}
+                    {SignInFormErrors.password}
                   </span>
                 </div>
               )}
