@@ -33,10 +33,10 @@ export default function SignIn() {
     const errors = {};
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if (!values.full_name && isCreateAccount)
-      errors.full_name = "Full name is required";
-    if (!values.email_address)
-      errors.email_address = "Email address is required";
+    if (isCreateAccount) {
+      if (!values.full_name) errors.full_name = "Full name is required";
+    }
+    if (!values.email_address) errors.email_address = "Email address is required";
     if (values.email_address && !emailPattern.test(values.email_address))
       errors.email_address = "Email address is invalid";
     if (!values.password) errors.password = "Password is required";
@@ -66,15 +66,13 @@ export default function SignIn() {
         throw new Error("Network response was not ok");
       }
 
-      const responseText = await response.text();
-      console.log("Signin successful:", responseText);
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
       navigate("/");
       setFormData({ email_address: "", password: "" });
     } catch (error) {
-      if (error.message.length) {
-        setError("Email or Password is incorrect");
-        setSignInFormErrors("")
-      }
+      setError("Email or Password is incorrect");
+      setSignInFormErrors({});
     }
   };
 
@@ -117,7 +115,7 @@ export default function SignIn() {
           <h1 className="font-semibold text-2xl text-center pb-6">
             Welcome to Mariz
           </h1>
-          <div className="flex flex-start w-full p-4 gap-4 rounded shadow ">
+          <div className="flex flex-start w-full p-4 gap-4 rounded shadow">
             <input
               type="radio"
               className="w-4 h-4"
@@ -198,7 +196,6 @@ export default function SignIn() {
                   id="showpassword"
                   name="showpassword"
                   onClick={togglePasswordVis}
-                  onChange={handleChange}
                 />
                 <label className="" htmlFor="showpassword">
                   Show password
@@ -212,7 +209,7 @@ export default function SignIn() {
               </button>
             </form>
           )}
-          <div className="flex flex-start w-full p-4 gap-4 rounded shadow ">
+          <div className="flex flex-start w-full p-4 gap-4 rounded shadow">
             <input
               className="w-4 h-4"
               type="radio"
@@ -255,7 +252,7 @@ export default function SignIn() {
                 value={formData.password}
               />
               {SignInFormErrors.password && (
-                <div className="flex items-center">
+                <div className="flex items-center mb-3">
                   <TiWarning className="text-red-500 mr-1" />
                   <span className="font-semibold text-[.9em] text-red-500">
                     {SignInFormErrors.password}
@@ -263,9 +260,9 @@ export default function SignIn() {
                 </div>
               )}
               {handleError && (
-                <div className="flex items-center">
+                <div className="flex items-center mb-3">
                   <TiWarning className="text-red-500 mr-1" />
-                  <span className="font-semibold text-[.9em] text-red-500 block">
+                  <span className="font-semibold text-[.9em] text-red-500">
                     {handleError}
                   </span>
                 </div>

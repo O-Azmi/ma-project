@@ -1,52 +1,68 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Logo from "../../Images/brand-logo.png";
-import { RiShoppingCartLine  } from "react-icons/ri";
+import { RiShoppingCartLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
-import {Link} from "react-router-dom";
-import Cart from './Cart'
+import Cart from "./Cart";
 import Authenticate from "./authenticate";
 import { CgProfile } from "react-icons/cg";
 import Homepage from "./Pages/Homepage";
 
-
 // This page is the navigation bar used throughout the website
 export default function Header() {
   const [toggle, setToggle] = useState(false);
+  const [isLoggedIn, setLogIn] = useState(false);
 
-  // This function toggles the dropdown menu on the navigation.
+  useEffect(() => {
+    // Check if the token exists in localStorage
+    const token = localStorage.getItem('token');
+    setLogIn(!!token); // Set logged-in state based on token existence
+  }, []);
+
   const toggleMenu = () => {
     setToggle(!toggle);
   };
 
-  const BurgerButton = () =>{
-    if(!toggle){
-     return <RxHamburgerMenu size={30} />
-
-    }else{
-      return <IoClose size={30}/>
+  const BurgerButton = () => {
+    if (!toggle) {
+      return <RxHamburgerMenu size={30} />;
+    } else {
+      return <IoClose size={30} />;
     }
-  }
+  };
+
+  const handleLogout = () => {
+    // Remove token and update login state
+    localStorage.removeItem('token');
+    setLogIn(false);
+  };
 
   return (
     <nav className="flex relative h-[3.5em] justify-between items-center text-black text-[1.1em] px-4">
-      <Link to="/" element={<Homepage/>}><img className="h-[3.3em] w-[8em]"  src={Logo} alt="Brand Logo" /></Link>
+      <Link to="/" element={<Homepage />}>
+        <img className="h-[3.3em] w-[8em]" src={Logo} alt="Brand Logo" />
+      </Link>
       <div className="flex items-center">
         <div>
-          <button
-            onClick={toggleMenu}
-            className="px-3 py-2 rounded-md mr-1 "
-          >
-            <BurgerButton/>
+          <button onClick={toggleMenu} className="px-3 py-2 rounded-md mr-1 ">
+            <BurgerButton />
           </button>
         </div>
-        <div className="mr-3" >
-        <Link to="/Authenticate" element={<Authenticate/>}>
-        <CgProfile size={30} /></Link>
-        </div>
-        <div >
-        <Link to="/cart" element={<Cart/>}>
-        <RiShoppingCartLine  size={30} /></Link>
+        {isLoggedIn ? (
+          <div className="mr-3">
+              <CgProfile color="#dbb995" size={30} />
+          </div>
+        ) : (
+          <Link to="/Authenticate" element={<Authenticate />}>
+            <button>Hello, Sign in</button>
+            </Link>
+
+        )}
+        <div>
+          <Link to="/cart" element={<Cart />}>
+            <RiShoppingCartLine size={30} />
+          </Link>
         </div>
       </div>
 
@@ -68,7 +84,7 @@ export default function Header() {
           </li>
           <li className="py-4 px-4 border-b border-gray-300 hover:bg-gray-400">
             <a href="#" className="text-black hover:underline">
-             Contact
+              Contact
             </a>
           </li>
           <li className="py-4 px-4 border-b border-gray-300 hover:bg-gray-400">

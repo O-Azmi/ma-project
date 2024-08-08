@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken")
 const express = require("express");
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcrypt");
@@ -15,7 +16,7 @@ const signin = async (req, res) => {
 
     // Query the database for the user's password hash and salt
     const [results] = await db.query(
-      'SELECT customer_id, password_hash, password_salt FROM customers WHERE email_address = ?',
+      'SELECT customer_id, full_name, password_hash, password_salt FROM customers WHERE email_address = ?',
       [email_address]
     );
 
@@ -23,16 +24,18 @@ const signin = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const {customer_id, password_hash: storedHash, password_salt: storedSalt } = results[0];
+    const { full_name, customer_id, password_hash: storedHash } = results[0];
 
     // Compare the provided password with the stored hash
-    const match = await bcrypt.hash(password, storedSalt).then(hash => hash === storedHash);
+    const match = await bcrypt.compare(password, storedHash);
 
     if (match) {
-      req.session.customer_id = customer_id;
-      req.session.visited = true;
-      console.log('Session data after sign-in:', req.session);
-      return res.status(200).send('Sign-in successful');
+      const token = jwt.sign(
+        { customer_id, full_name },
+        process.env.MY_SECRET, 
+        { expiresIn: '1h' }
+      );
+      return res.status(200).json({ message: 'Sign-in successful', token });
     } else {
       console.log('Password does not match.');
       return res.status(401).send('Invalid password');

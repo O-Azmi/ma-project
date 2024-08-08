@@ -22,7 +22,7 @@ const signup = async (req, res) => {
 
     const query = 'INSERT INTO customers (email_address, full_name, password_hash, password_salt) VALUES (?, ?, ?, ?)';
     const values = [email_address, full_name, password_hash, salt];
-    const [results] = await db.query(query, values);
+    await db.query(query, values);
 
     res.status(200).send("Yes");
   } catch (err) {
