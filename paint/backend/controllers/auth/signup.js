@@ -14,9 +14,11 @@ const hash = promisify(bcrypt.hash);
 
 const signup = async (req, res) => {
   try {
-    const { full_name, email_address, password } = req.body;
+    let { full_name, email_address, password } = req.body;
     const saltRounds = 10;
 
+    full_name = full_name.toLowerCase();
+    email_address = email_address.toLowerCase();
     const salt = await genSalt(saltRounds);
     const password_hash = await hash(password, salt);
 

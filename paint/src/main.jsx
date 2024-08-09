@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Homepage from './components/Pages/Homepage';
+import Homepage from './Pages/Homepage';
 import Cart from './components/Cart';
 import './index.css'
 import Authenticate from './components/authenticate'

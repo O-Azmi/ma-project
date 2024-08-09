@@ -67,6 +67,7 @@ export default function SignIn() {
       }
 
       const data = await response.json();
+      localStorage.setItem('full_name', data.full_name)
       localStorage.setItem('token', data.token);
       navigate("/");
       setFormData({ email_address: "", password: "" });
