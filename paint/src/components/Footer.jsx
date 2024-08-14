@@ -4,12 +4,16 @@ import { FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { FaRegCopyright } from "react-icons/fa";
+import { FaPaintbrush } from "react-icons/fa6";
 
 export default function Footer() {
   return (
     <div className="h-[67vh] p-4 short:h-[80vh] vshort:h-[95vh]">
       <div className="mb-4">
-        <img src={Logo} className="w-[10em] pb-6 relative right-5" />
+        <div className="flex items-center mb-2 text-[#1c5a87]">
+        <FaPaintbrush className="mr-2" size={20} />
+        <p className="text-2xl font-bold">Mariz Art</p>{" "}
+        </div>
         <p className="">
           Stay up to date on the latest features and releases by joining our
           newsletter.
@@ -73,7 +77,9 @@ export default function Footer() {
       </div>
       <div className="flex pt-8">
         <FaRegCopyright className="mr-2" />
-        <p className="text-[.9em] text-gray-600">2024 Mariz Art. All rights reserved.</p>
+        <p className="text-[.9em] text-gray-600">
+          2024 Mariz Art. All rights reserved.
+        </p>
       </div>
     </div>
   );

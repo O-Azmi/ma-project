@@ -32,7 +32,7 @@ export default function Learn() {
         <div className="flex justify-center items-center h-dvh flex-col">
             <p className="text-black text-[1.3em] font-bold mb-4">We're hiring!</p>
             <p className="text-black  font-bold mb-4">Join our team of talented painters.</p>
-          <button className="cursor-pointer h-[3em] w-[9em] p-4 border border-black rounded-md bg-[#2d2d2d] text-white font-semibold">
+          <button className="cursor-pointer h-[3em] w-[9em] p-4 border border-black rounded-md bg-[#1c5a87] text-white font-semibold">
             Apply Now
           </button>
         </div>
