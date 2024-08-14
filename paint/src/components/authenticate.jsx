@@ -113,7 +113,7 @@ export default function SignIn() {
       <Header />
       <section className="flex justify-center h-[20em] pb-20">
         <div className="flex flex-col border shadow-black px-4 py-6 mt-[6em] rounded w-full">
-          <h1 className="font-semibold text-2xl text-center pb-6">
+          <h1 className="font-semibold text-3xl text-[#1c5a87] text-center pb-6">
             Welcome to Mariz
           </h1>
           <div className="flex flex-start w-full p-4 gap-4 rounded shadow">
@@ -204,7 +204,7 @@ export default function SignIn() {
               </div>
               <button
                 type="submit"
-                className="mt-4 p-4 rounded bg-[#2D2D2D] text-white hover:bg-gray-600 hover:text-black"
+                className="mt-4 p-4 rounded bg-[#1c5a87] text-white hover:bg-gray-600 hover:text-black"
               >
                 Create account
               </button>
@@ -270,12 +270,12 @@ export default function SignIn() {
               )}
               <button
                 type="submit"
-                className="mt-4 p-4 mb-4 rounded bg-[#2D2D2D] text-white hover:bg-gray-600 hover:text-black"
+                className="mt-4 p-4 mb-4 rounded bg-[#2D2D2D] bg-[#1c5a87] text-white hover:bg-gray-600 hover:text-black"
               >
                 Sign In
               </button>
               <div>
-                <a href="#" className="font-bold">
+                <a href="#" className="font-bold text-[#1c5a87]">
                   Forgot password?
                 </a>
               </div>

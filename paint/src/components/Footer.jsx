@@ -27,7 +27,7 @@ export default function Footer() {
           placeholder="Your email"
           className="p-3 mb-4 border border-black border-solid placeholder:text-gray-400"
         />
-        <button className="p-3 border border-solid border-black">
+        <button className="p-3 border bg-[#1c5a87] text-white border-solid border-black">
           Subscribe
         </button>
       </form>
