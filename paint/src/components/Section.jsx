@@ -1,7 +1,7 @@
 import Card from "./Card";
-import Abstract from "../../public/Images/Abstract.jpg";
-import Oil from "../../public/Images/Waves.jpg";
-import SVG from "../../public/Images/2-Section.svg";
+import Abstract from "../../public/Abstract.jpg";
+import Oil from "../../public/Waves.jpg";
+import SVG from "../../public/2-Section.svg";
 
 export default function Section() {
   return (
