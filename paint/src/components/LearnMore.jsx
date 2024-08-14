@@ -1,6 +1,6 @@
-import BackSvg from "../../Images/meet-team.svg";
+import BackSvg from "../../public/Images/meet-team.svg";
 import ArtistCard from './ArtistCard'
-import Artist1 from '../../Images/artist1.jpg'
+import Artist1 from '../../public/Images/artist1.jpg'
 
 export default function Learn() {
   return (
