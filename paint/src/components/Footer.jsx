@@ -36,7 +36,7 @@ export default function Footer() {
           updates from our company.
         </p>
       </div>
-      <h2 className="font-bold text-[1.2rem] mb-5">Follow Us</h2>
+      <h2 className="font-bold text-[#1c5a87] text-[1.2rem] mb-5">Follow Us</h2>
       <ul className="flex flex-col">
         <ul className="flex ">
           <li className="pb-3 pr-3">

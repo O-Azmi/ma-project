@@ -1,5 +1,5 @@
 import React from "react";
-import backgroundImage from "../../public/blob-scene-haikei.svg";
+import backgroundImage from "/blob-scene-haikei.svg";
 
 
 // This page is the first page users will see.

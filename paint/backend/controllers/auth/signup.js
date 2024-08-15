@@ -14,7 +14,7 @@ const hash = promisify(bcrypt.hash);
 
 const signup = async (req, res) => {
   try {
-    let { full_name, email_address, password } = req.body;
+    let { full_name, email_address, phone_number, password } = req.body;
     const saltRounds = 10;
 
     full_name = full_name.toLowerCase();
@@ -22,8 +22,8 @@ const signup = async (req, res) => {
     const salt = await genSalt(saltRounds);
     const password_hash = await hash(password, salt);
 
-    const query = 'INSERT INTO customers (email_address, full_name, password_hash, password_salt) VALUES (?, ?, ?, ?)';
-    const values = [email_address, full_name, password_hash, salt];
+    const query = 'INSERT INTO customers (email_address, full_name, phone_number, password_hash, password_salt) VALUES (?, ?, ?, ?, ?)';
+    const values = [email_address, full_name, phone_number, password_hash, salt];
     await db.query(query, values);
 
     res.status(200).send("Yes");

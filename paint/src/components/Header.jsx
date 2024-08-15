@@ -40,6 +40,7 @@ export default function Header() {
         <FaPaintbrush className="mr-2" size={20} />
         <p className="text-2xl font-bold">Mariz Art</p>
       </Link>
+      <div className="flex items-center">
       <div 
         className="flex items-center relative group" 
         onMouseEnter={() => setDropdownOpen(true)}
@@ -53,7 +54,7 @@ export default function Header() {
               Account & Settings
               <IoMdArrowDropdown size={20} className="relative top-[.9em] left-0" />
             </button>
-            <div className={`absolute right-[-6px] top-[2.7em] mt-1 w-[22em] bg-white border rounded shadow-lg ${dropdownOpen ? 'block' : 'hidden'} z-20`}>
+            <div className={`absolute right-[-36px] top-[2.7em] mt-1 w-[22em] bg-white border rounded shadow-lg ${dropdownOpen ? 'block' : 'hidden'} z-20`}>
               <IoMdArrowDropup size={33} color="white" className="absolute top-[-1.1em] right-[46px]" />
               <div className="flex pt-2 pb-2">
                 <div className="w-1/2 border-r border-gray-200 border-solid px-4">
@@ -120,12 +121,13 @@ export default function Header() {
             </button>
           </Link>
         )}
-        <div>
+      </div>
+       <div>
           <Link to="/cart" element={<Cart />}>
             <RiShoppingCartLine size={30} />
           </Link>
         </div>
-      </div>
+        </div>
     </nav>
   );
 }

@@ -13,6 +13,7 @@ export default function SignIn() {
   const [formData, setFormData] = useState({
     full_name: "",
     email_address: "",
+    phone_number: "",
     password: "",
   });
 
@@ -32,15 +33,21 @@ export default function SignIn() {
   const validation = (values) => {
     const errors = {};
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
+    const phonePattern = /^(?:\+1\s?)?\(?(\d{3})\)?[\s.-]?(\d{3})[\s.-]?(\d{4})$/;
+  
     if (isCreateAccount) {
       if (!values.full_name) errors.full_name = "Full name is required";
+      if (!values.phone_number) errors.phone_number = "Phone number is required";
+      if (values.phone_number && !phonePattern.test(values.phone_number))
+        errors.phone_number = "Enter a valid Canadian phone number";
     }
-    if (!values.email_address) errors.email_address = "Email address is required";
+    
+    if (!values.email_address)
+      errors.email_address = "Email address is required";
     if (values.email_address && !emailPattern.test(values.email_address))
       errors.email_address = "Email address is invalid";
     if (!values.password) errors.password = "Password is required";
-
+    
     return errors;
   };
 
@@ -67,13 +74,16 @@ export default function SignIn() {
       }
 
       const data = await response.json();
-      localStorage.setItem('full_name', data.full_name)
-      localStorage.setItem('token', data.token);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("full_name", data.full_name);
+      localStorage.setItem("email_address", data.email_address);
+      localStorage.setItem("phone_number", data.phone_number);
       navigate("/");
       setFormData({ email_address: "", password: "" });
     } catch (error) {
       setError("Email or Password is incorrect");
       setSignInFormErrors({});
+      console.error("Sign-in error:", error);
     }
   };
 
@@ -102,7 +112,12 @@ export default function SignIn() {
       console.log("Signup successful:", responseText);
       navigate("/");
 
-      setFormData({ full_name: "", email_address: "", password: "" });
+      setFormData({
+        full_name: "",
+        email_address: "",
+        phone_number: "",
+        password: "",
+      });
     } catch (error) {
       console.error("Error signing up:", error.message);
     }
@@ -168,6 +183,25 @@ export default function SignIn() {
                   <TiWarning className="text-red-500 mr-1" />
                   <span className="font-semibold text-[.9em] text-red-500">
                     {SignUpFormErrors.email_address}
+                  </span>
+                </div>
+              )}
+              <label htmlFor="phone_number" className="pb-2 font-semibold">
+                Phone number
+              </label>
+              <input
+                className="rounded shadow mb-3 p-3"
+                type="phone"
+                name="phone_number"
+                id="phone"
+                onChange={handleChange}
+                value={formData.phone_number}
+              />
+              {SignUpFormErrors.phone_number && (
+                <div className="flex items-center mb-3">
+                  <TiWarning className="text-red-500 mr-1" />
+                  <span className="font-semibold text-[.9em] text-red-500">
+                    {SignUpFormErrors.phone_number}
                   </span>
                 </div>
               )}
@@ -270,7 +304,7 @@ export default function SignIn() {
               )}
               <button
                 type="submit"
-                className="mt-4 p-4 mb-4 rounded bg-[#2D2D2D] bg-[#1c5a87] text-white hover:bg-gray-600 hover:text-black"
+                className="mt-4 p-4 mb-4 rounded bg-[#1c5a87] text-white hover:bg-gray-600 hover:text-black"
               >
                 Sign In
               </button>

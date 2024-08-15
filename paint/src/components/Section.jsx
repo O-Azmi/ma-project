@@ -1,7 +1,7 @@
 import Card from "./Card";
-import Abstract from "../../public/Abstract.jpg";
-import Oil from "../../public/Waves.jpg";
-import SVG from "../../public/2-Section.svg";
+import Abstract from "/Abstract.jpg";
+import Oil from "/Waves.jpg";
+import SVG from "/2-Section.svg";
 
 export default function Section() {
   return (
@@ -30,7 +30,7 @@ export default function Section() {
           <Card label={"Oil Paintings"} src={Oil} />
         </div>
         <div className="flex justify-center pb-4">
-          <button className="cursor-pointer p-4 border border-black rounded-md bg-[#2d2d2d] text-white font-semibold">
+          <button className="cursor-pointer p-4 border border-black rounded-md bg-[#1c5a87] text-white font-semibold">
             Explore Our Collection
           </button>
         </div>

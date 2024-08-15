@@ -20,7 +20,7 @@ const signin = async (req, res) => {
 
     // Query the database for the user's password hash and salt
     const [results] = await db.query(
-      "SELECT customer_id, full_name, password_hash, password_salt FROM customers WHERE email_address = ?",
+      "SELECT customer_id, full_name, phone_number, password_hash, password_salt FROM customers WHERE email_address = ?",
       [email_address]
     );
 
@@ -28,7 +28,7 @@ const signin = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    const { full_name, customer_id, password_hash: storedHash } = results[0];
+    const { full_name, phone_number, customer_id, password_hash: storedHash } = results[0];
 
     // Compare the provided password with the stored hash
     const match = await bcrypt.compare(password, storedHash);
@@ -39,7 +39,7 @@ const signin = async (req, res) => {
         process.env.MY_SECRET,
         { expiresIn: "1h" }
       );
-      return res.status(200).json({ message: "Sign-in successful", token, full_name });
+      return res.status(200).json({ message: "Sign-in successful", token, full_name, email_address, phone_number });
     } else {
       return res.status(401).json({ error: "Invalid password" });
     }

@@ -13,7 +13,7 @@ export default function Card({ src, alt, label }) {
         <div className="flex justify-between ">
           <p className="">{label}</p>
           <Link>
-            <button className="font-semibold">View More</button>
+            <button className="font-semibold text-[#1c5a87]">View More</button>
           </Link>
         </div>
       </div>
