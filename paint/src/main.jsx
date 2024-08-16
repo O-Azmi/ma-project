@@ -7,11 +7,13 @@ import Profile from './components/Profile';
 import EditProfile from './components/Edit-Profile'
 import Authenticate from './components/authenticate'
 import './index.css'
+import Header from './components/Header';
 
 const root = createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
+  <Header/>
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/cart" element={<Cart />} />

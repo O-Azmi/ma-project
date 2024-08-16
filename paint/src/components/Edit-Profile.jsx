@@ -1,13 +1,22 @@
-import Header from "./Header";
 import { Link } from "react-router-dom";
 
 export default function EditProfile() {
-    const StoredfullName = localStorage.getItem("full_name");
-    const StoredEmail = localStorage.getItem("email_address");
-    const StoredMobile = localStorage.getItem("phone_number");
+  const StoredfullName = localStorage.getItem("full_name");
+  const StoredEmail = localStorage.getItem("email_address");
+  const StoredMobile = localStorage.getItem("phone_number");
+  const PassLength = localStorage.getItem("Plength");
+  let passPrint = "";
+  const passLengthInStars = (passLength) => {
+    let i = 0;
+    while (i < passLength) {
+      passPrint += "*";
+      i++;
+    }
+    return passPrint;
+  };
+
   return (
-    <section className="">
-      <Header />
+    <section >
       <div className=" flex flex-col pl-4 mt-8 mb-4 w-[50wh]">
         <div className="flex">
           <Link to="/Profile">
@@ -21,38 +30,46 @@ export default function EditProfile() {
           Login and Security
         </h1>
       </div>
-      <div className="flex border-2  m-4 rounded border-gray-200">
+      <div className="flex border m-4 rounded border-gray-300">
         <ul className="w-full">
-          <li className="flex justify-between w-[100%] mb-4 py-4 px-4 border-b-2 border-gray-300 hover:bg-gray-200 transition-colors duration-300">
+          <li className="flex justify-between w-[100%] py-6 px-4 border-b border-gray-300 hover:bg-gray-200 transition-colors duration-300">
             <div className=" flex-col">
               <p className=" mb-3 font-bold">Name</p>
-              <p className="text-gray-700">
-                {StoredfullName}
-              </p>
+              <p className="text-gray-700 mb-2">{StoredfullName}</p>
             </div>
-            <button className="py-2 px-8 text-[#1b5a87] border  border-[#1b5a87] rounded-[100px]">Edit</button>
+            <button className="h-10 px-10 hover:bg-[#1b5a87] hover:text-white text-[#1b5a87] border  border-[#1b5a87] rounded-[20px]">
+              Edit
+            </button>
           </li>
-          
-          <li className="flex justify-between w-[100%] mb-4 py-4 px-4 border-b-2 border-gray-300 hover:bg-gray-200 transition-colors duration-300">
+
+          <li className="flex justify-between w-[100%] py-6 px-4 border-b border-gray-300 hover:bg-gray-200 transition-colors duration-300">
             <div className=" flex-col">
               <p className=" mb-3 font-bold">Email</p>
-              <p className="text-gray-700">
-                {StoredEmail}
-              </p>
+              <p className="text-gray-700 mb-2">{StoredEmail}</p>
             </div>
-            <button className="py-2 px-8 text-[#1b5a87] border  border-[#1b5a87] rounded-[100px]">Edit</button>
+            <button className="h-10 px-10 hover:bg-[#1b5a87] hover:text-white text-[#1b5a87] border  border-[#1b5a87] rounded-[20px]">
+              Edit
+            </button>
           </li>
-          
-          <li className="flex justify-between w-[100%] mb-4 py-4 px-4 border-b-2 border-gray-300 hover:bg-gray-200 transition-colors duration-300">
+
+          <li className="flex justify-between w-[100%] py-6 px-4 border-b border-gray-300 hover:bg-gray-200 transition-colors duration-300">
             <div className=" flex-col">
               <p className=" mb-3 font-bold">Phone number</p>
-              <p className="text-gray-700">
-                +{StoredMobile}
-              </p>
+              <p className="text-gray-700 mb-2">+{StoredMobile}</p>
             </div>
-            <button className="py-2 px-8 text-[#1b5a87] border  border-[#1b5a87] rounded-[100px]">Edit</button>
+            <button className="h-10 px-10 hover:bg-[#1b5a87] hover:text-white text-[#1b5a87] border  border-[#1b5a87] rounded-[20px]">
+              Edit
+            </button>
           </li>
-          
+          <li className="flex justify-between w-[100%] py-6 px-4  hover:bg-gray-200 transition-colors duration-300">
+            <div className=" flex-col">
+              <p className=" mb-3 font-bold">Password</p>
+              <p className="text-gray-700 mb-2">{passLengthInStars(PassLength)}</p>
+            </div>
+            <button className="h-10 px-10 hover:bg-[#1b5a87] hover:text-white text-[#1b5a87] border  border-[#1b5a87] rounded-[20px]">
+              Edit
+            </button>
+          </li>
         </ul>
       </div>
     </section>

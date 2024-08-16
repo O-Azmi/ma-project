@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router";
-import Header from "./Header";
 import { useState } from "react";
 import { TiWarning } from "react-icons/ti";
 
@@ -78,6 +77,7 @@ export default function SignIn() {
       localStorage.setItem("full_name", data.full_name);
       localStorage.setItem("email_address", data.email_address);
       localStorage.setItem("phone_number", data.phone_number);
+      localStorage.setItem("Plength", data.Plength);
       navigate("/");
       setFormData({ email_address: "", password: "" });
     } catch (error) {
@@ -125,7 +125,6 @@ export default function SignIn() {
 
   return (
     <>
-      <Header />
       <section className="flex justify-center h-[20em] pb-20">
         <div className="flex flex-col border shadow-black px-4 py-6 mt-[6em] rounded w-full">
           <h1 className="font-semibold text-3xl text-[#1c5a87] text-center pb-6">

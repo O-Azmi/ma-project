@@ -12,7 +12,7 @@ const db = mysql.createPool(dbConfig);
 const signin = async (req, res) => {
   try {
     const { email_address, password } = req.body;
-
+    const Plength = password.length;
     // Check if email_address and password are provided
     if (!email_address || !password) {
       return res.status(400).json({ error: "Email and password are required" });
@@ -39,7 +39,7 @@ const signin = async (req, res) => {
         process.env.MY_SECRET,
         { expiresIn: "1h" }
       );
-      return res.status(200).json({ message: "Sign-in successful", token, full_name, email_address, phone_number });
+      return res.status(200).json({ message: "Sign-in successful", token, full_name, email_address, phone_number, Plength });
     } else {
       return res.status(401).json({ error: "Invalid password" });
     }

@@ -1,4 +1,3 @@
-import Header from "./Header";
 import { Link } from "react-router-dom";
 import { GiPaintBucket } from "react-icons/gi";
 import { GrShieldSecurity } from "react-icons/gr";
@@ -8,7 +7,6 @@ import { BiMessageSquareDetail } from "react-icons/bi";
 export default function Profile() {
   return (
     <section className="">
-      <Header />
       <div className="pl-4 mt-8 mb-4 flex w-[50wh]">
         <h1 className="font-bold text-2xl text-[#1b5a87]">Your Account</h1>
       </div>

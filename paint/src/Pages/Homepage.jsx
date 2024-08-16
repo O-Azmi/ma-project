@@ -8,7 +8,6 @@ import Footer from '../components/Footer'
 export default function Homepage(){
     return(
         <>
-        <Header/>
         <Hero/>
         <Section/>
         <LearnMore/>
